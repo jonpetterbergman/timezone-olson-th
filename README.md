@@ -1,5 +1,5 @@
 # timezone-olson-th
-Load Olson timezone files at compile time
+Template Haskell to load a TimeZoneSeries from an Olson file at compile time.
 
 For Example:
 

@@ -4,7 +4,14 @@
 name:                timezone-olson-th
 version:             0.1.0.0
 synopsis:            Load TimeZoneSeries from an Olson file at compile time.
--- description:         
+description:         
+  Template Haskell to load a TimeZoneSeries from an Olson file at compile time.
+
+  For Example:
+
+  -- > myTimeZoneSeries :: TimeZoneSeries
+  -- > myTimeZoneSeries = $(loadTZFile "/usr/share/zoneinfo/Europe/Stockholm")
+
 homepage:            http://github.com/jonpetterbergman/timezone-olson-th
 license:             BSD3
 license-file:        LICENSE

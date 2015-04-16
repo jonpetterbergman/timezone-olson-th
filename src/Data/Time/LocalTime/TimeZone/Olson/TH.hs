@@ -1,3 +1,4 @@
+{-# LANGUAGE TemplateHaskell #-}
 -- |
 -- Load TimeZoneSeries from an Olson file at compile time.
 --  
@@ -18,7 +19,8 @@ import Data.Time.LocalTime.TimeZone.Series (TimeZoneSeries(..))
 import Data.Time.LocalTime                 (TimeZone(..))
 import Data.Time                           (UTCTime(..),
                                             Day(..),
-                                            DiffTime)
+                                            DiffTime,
+                                            secondsToDiffTime)
 import Language.Haskell.TH                 (Q,
                                             runIO,
                                             Exp(..),
@@ -27,7 +29,7 @@ import Language.Haskell.TH                 (Q,
 
 -- | Make a splice of a TimeZoneSeries from an Olson file.
 loadTZFile :: FilePath -- ^ Path to the Olson file.
-       -> Q Exp
+           -> Q Exp
 loadTZFile zf = 
   runIO $ fmap mkTZS $ getTimeZoneSeriesFromOlsonFile zf
 
@@ -35,7 +37,7 @@ loadTZFile zf =
 mkTZS :: TimeZoneSeries -- ^ The TimeZoneSeries to be spliced
       -> Exp    
 mkTZS (TimeZoneSeries def tlist) =    
-  AppE (AppE (ConE $ mkName "TimeZoneSeries") (litTimeZone def))
+  AppE (AppE (ConE 'TimeZoneSeries) (litTimeZone def))
   (mkList tlist)
   
 mkList :: [(UTCTime,TimeZone)] 
@@ -50,9 +52,9 @@ mkPair (t,tz) =
 litUTCTime :: UTCTime 
            -> Exp  
 litUTCTime (UTCTime (ModifiedJulianDay d) s) = 
-  AppE (AppE (ConE $ mkName "UTCTime")
-        (AppE (ConE (mkName "ModifiedJulianDay")) (LitE $ IntegerL $ d)))
-  (AppE (VarE $ mkName "secondsToDiffTime") 
+  AppE (AppE (ConE 'UTCTime)
+        (AppE (ConE 'ModifiedJulianDay) (LitE $ IntegerL $ d)))
+  (AppE (VarE 'secondsToDiffTime) 
    (LitE $ IntegerL $ diffTimeToInteger s))
 
 diffTimeToInteger :: DiffTime 
@@ -66,7 +68,7 @@ diffTimeToInteger s =
 litTimeZone :: TimeZone 
             -> Exp
 litTimeZone (TimeZone m s n) = 
-  AppE (AppE (AppE (ConE (mkName "TimeZone")) 
+  AppE (AppE (AppE (ConE 'TimeZone) 
               (LitE $ IntegerL $ toInteger m))
         (ConE $ mkName $ show s))
   (LitE $ StringL n)

@@ -13,7 +13,8 @@ description:
   -- > myTimeZoneSeries = $(loadTZFile "/usr/share/zoneinfo/Europe/Stockholm")
 
 homepage:            http://github.com/jonpetterbergman/timezone-olson-th
-license:             BSD3
+bug-reports:         http://github.com/jonpetterbergman/timezone-olson-th/issues
+license:             BSD3       
 license-file:        LICENSE
 author:              Petter Bergman
 maintainer:          jon.petter.bergman@gmail.com
@@ -22,6 +23,14 @@ category:            Data
 build-type:          Simple
 extra-source-files:  README.md
 cabal-version:       >=1.10
+source-repository head
+  type:     git
+  location: http://github.com/jonpetterbergman/timezone-olson-th
+
+source-repository this
+  type:     git
+  location: http://github.com/jonpetterbergman/timezone-olson-th
+  tag:      v0.1.0.0
 
 library
   exposed-modules:     Data.Time.LocalTime.TimeZone.Olson.TH

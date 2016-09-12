@@ -2,7 +2,7 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                timezone-olson-th
-version:             0.1.0.1
+version:             0.1.0.2
 synopsis:            Load TimeZoneSeries from an Olson file at compile time.
 description:         
   Template Haskell to load a TimeZoneSeries from an Olson file at compile time.
@@ -30,7 +30,7 @@ source-repository head
 source-repository this
   type:     git
   location: http://github.com/jonpetterbergman/timezone-olson-th
-  tag:      v0.1.0.1
+  tag:      v0.1.0.2
 
 library
   exposed-modules:     Data.Time.LocalTime.TimeZone.Olson.TH

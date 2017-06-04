@@ -2,7 +2,7 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                timezone-olson-th
-version:             0.1.0.2
+version:             0.1.0.3
 synopsis:            Load TimeZoneSeries from an Olson file at compile time.
 description:         
   Template Haskell to load a TimeZoneSeries from an Olson file at compile time.
@@ -39,7 +39,7 @@ library
   build-depends:       base >=4.7 && <4.10, 
                        timezone-olson >=0.1 && <0.2, 
                        timezone-series >=0.1 && <0.2, 
-                       time >=1.4 && <1.7, 
+                       time >=1.4 && <1.9, 
                        template-haskell
   hs-source-dirs:      src
   default-language:    Haskell2010
